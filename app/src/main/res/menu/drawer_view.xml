@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="org.example.jeffcunningham.wagercrony_android.MainActivity">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_signout"
+
+            android:title="@string/signout" />
+        <item
+            android:id="@+id/nav_signin"
+
+            android:title="@string/signin" />
+        <item
+            android:id="@+id/nav_about"
+
+            android:title="@string/about" />
+        <item
+            android:id="@+id/nav_admin"
+
+            android:title="@string/admin" />
+    </group>
+</menu>

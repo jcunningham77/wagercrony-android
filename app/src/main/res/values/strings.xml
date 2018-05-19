@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">wagercrony-android</string>
-    <string name="action_settings">Settings</string>
+
+    <string name="drawerHeader">Premium Hockey Picks</string>
+    <string name="signout">Sign Out</string>
+    <string name="signin">Sign In</string>
+    <string name="about">About</string>
+    <string name="admin">Admin</string>
 </resources>

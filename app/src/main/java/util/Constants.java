@@ -6,5 +6,8 @@ package util;
 
 public class Constants {
 
-    public static final String LoginFragmentTag = "LoginFragment";
+    public static final String SignInFragmentTag = "SignInFragment";
+    public static final String SignOutFragmentTag = "SignOutFragment";
+    public static final String AboutFragmentTag = "AboutFragment";
+    public static final String AdminFragmentTag = "AdminFragment";
 }

@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -15,6 +16,10 @@ import android.view.MenuItem;
 import org.example.jeffcunningham.wagercrony_android.di.DaggerMainComponent;
 import org.example.jeffcunningham.wagercrony_android.di.MainComponent;
 import org.example.jeffcunningham.wagercrony_android.di.MainModule;
+import org.example.jeffcunningham.wagercrony_android.fragments.AboutFragment;
+import org.example.jeffcunningham.wagercrony_android.fragments.AdminFragment;
+import org.example.jeffcunningham.wagercrony_android.fragments.SignInFragment;
+import org.example.jeffcunningham.wagercrony_android.fragments.SignOutFragment;
 
 import javax.inject.Inject;
 
@@ -47,19 +52,81 @@ public class MainActivity extends AppCompatActivity {
         actionbar.setHomeAsUpIndicator(menuIcon);
         actionbar.setDisplayShowTitleEnabled(false);
         drawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+
+
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        // set item as selected to persist highlight
+                        menuItem.setChecked(true);
+                        // close drawer when item is tapped
+
+                        switch (menuItem.getItemId()){
+                            case R.id.nav_signin:
+                                navigateToFragment(Constants.SignInFragmentTag);
+                                break;
+                            case R.id.nav_signout:
+                                navigateToFragment(Constants.SignOutFragmentTag);
+                                break;
+                            case R.id.nav_admin:
+                                navigateToFragment(Constants.AdminFragmentTag);
+                                break;
+                            case R.id.nav_about:
+                                navigateToFragment(Constants.AboutFragmentTag);
+                                break;
+                        }
+
+                        drawerLayout.closeDrawers();
+
+                        // Add code here to update the UI based on the item selected
+                        // For example, swap UI fragments here
+
+                        return true;
+                    }
+                });
+
+
 
 
         component().inject(this);
 
         logger.info(TAG, "onCreate: logger initialized");
 
-        FragmentManager manager = getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.fragment_container,new LoginFragment(), Constants.LoginFragmentTag);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        navigateToFragment(Constants.SignInFragmentTag);
 
     }
+
+    private void navigateToFragment(String destination){
+
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+
+        switch (destination){
+            case Constants.SignInFragmentTag:{
+                transaction.replace(R.id.fragment_container,new SignInFragment(), Constants.SignInFragmentTag);
+                break;
+            }
+            case Constants.SignOutFragmentTag:{
+                transaction.replace(R.id.fragment_container,new SignOutFragment(), Constants.SignInFragmentTag);
+                break;
+            }
+            case Constants.AboutFragmentTag:{
+                transaction.replace(R.id.fragment_container,new AboutFragment(), Constants.SignInFragmentTag);
+                break;
+            }
+            case Constants.AdminFragmentTag:{
+                transaction.replace(R.id.fragment_container,new AdminFragment(), Constants.SignInFragmentTag);
+                break;
+            }
+        }
+
+
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

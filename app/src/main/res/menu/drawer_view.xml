@@ -4,13 +4,13 @@
     tools:context="org.example.jeffcunningham.wagercrony_android.MainActivity">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_signout"
-
-            android:title="@string/signout" />
-        <item
             android:id="@+id/nav_signin"
 
             android:title="@string/signin" />
+        <item
+            android:id="@+id/nav_signout"
+
+            android:title="@string/signout" />
         <item
             android:id="@+id/nav_about"
 

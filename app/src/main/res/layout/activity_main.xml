@@ -20,7 +20,8 @@ android:fitsSystemWindows="true">
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@drawable/phplogooctinfontandroidtoolbar"
+        android:background="@drawable/logotoolbar"
+        android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
 </FrameLayout>

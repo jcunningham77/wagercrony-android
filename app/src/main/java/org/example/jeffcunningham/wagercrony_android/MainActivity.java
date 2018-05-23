@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import org.example.jeffcunningham.wagercrony_android.di.DaggerMainComponent;
@@ -18,8 +19,10 @@ import org.example.jeffcunningham.wagercrony_android.di.MainComponent;
 import org.example.jeffcunningham.wagercrony_android.di.MainModule;
 import org.example.jeffcunningham.wagercrony_android.fragments.AboutFragment;
 import org.example.jeffcunningham.wagercrony_android.fragments.AdminFragment;
+import org.example.jeffcunningham.wagercrony_android.fragments.PicksFragment;
 import org.example.jeffcunningham.wagercrony_android.fragments.SignInFragment;
 import org.example.jeffcunningham.wagercrony_android.fragments.SignOutFragment;
+import org.example.jeffcunningham.wagercrony_android.fragments.TrackFragment;
 
 import javax.inject.Inject;
 
@@ -98,40 +101,26 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void navigateToFragment(String destination){
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
 
-        FragmentManager manager = getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-
-        switch (destination){
-            case Constants.SignInFragmentTag:{
-                transaction.replace(R.id.fragment_container,new SignInFragment(), Constants.SignInFragmentTag);
-                break;
-            }
-            case Constants.SignOutFragmentTag:{
-                transaction.replace(R.id.fragment_container,new SignOutFragment(), Constants.SignInFragmentTag);
-                break;
-            }
-            case Constants.AboutFragmentTag:{
-                transaction.replace(R.id.fragment_container,new AboutFragment(), Constants.SignInFragmentTag);
-                break;
-            }
-            case Constants.AdminFragmentTag:{
-                transaction.replace(R.id.fragment_container,new AdminFragment(), Constants.SignInFragmentTag);
-                break;
-            }
-        }
-
-
-        transaction.addToBackStack(null);
-        transaction.commit();
+        getMenuInflater().inflate(R.menu.action_items,menu);
+        return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            case R.id.action_picks:
+                navigateToFragment(Constants.PicksFragmentTag);
+                return true;
+            case R.id.action_track:
+                navigateToFragment(Constants.TrackFragmentTag);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -147,6 +136,43 @@ public class MainActivity extends AppCompatActivity {
                     .build();
         }
         return component;
+    }
+
+    private void navigateToFragment(String destination){
+
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+
+        switch (destination){
+            case Constants.SignInFragmentTag:{
+                transaction.replace(R.id.fragment_container,new SignInFragment(), Constants.SignInFragmentTag);
+                break;
+            }
+            case Constants.SignOutFragmentTag:{
+                transaction.replace(R.id.fragment_container,new SignOutFragment(), Constants.SignOutFragmentTag);
+                break;
+            }
+            case Constants.AboutFragmentTag:{
+                transaction.replace(R.id.fragment_container,new AboutFragment(), Constants.AboutFragmentTag);
+                break;
+            }
+            case Constants.TrackFragmentTag:{
+                transaction.replace(R.id.fragment_container,new TrackFragment(), Constants.TrackFragmentTag);
+                break;
+            }
+            case Constants.PicksFragmentTag:{
+                transaction.replace(R.id.fragment_container,new PicksFragment(), Constants.PicksFragmentTag);
+                break;
+            }
+            case Constants.AdminFragmentTag:{
+                transaction.replace(R.id.fragment_container,new AdminFragment(), Constants.AdminFragmentTag);
+                break;
+            }
+        }
+
+
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 

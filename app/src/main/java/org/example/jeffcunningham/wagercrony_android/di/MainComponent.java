@@ -3,9 +3,11 @@ package org.example.jeffcunningham.wagercrony_android.di;
 import org.example.jeffcunningham.wagercrony_android.fragments.AboutFragment;
 import org.example.jeffcunningham.wagercrony_android.fragments.AdminFragment;
 import org.example.jeffcunningham.wagercrony_android.MainActivity;
+import org.example.jeffcunningham.wagercrony_android.fragments.PicksFragment;
 import org.example.jeffcunningham.wagercrony_android.fragments.SignInFragment;
 import org.example.jeffcunningham.wagercrony_android.fragments.SignOutFragment;
 import org.example.jeffcunningham.wagercrony_android.di.annotations.PerActivity;
+import org.example.jeffcunningham.wagercrony_android.fragments.TrackFragment;
 
 import dagger.Component;
 
@@ -21,4 +23,6 @@ public interface MainComponent {
     void inject(SignOutFragment fragment);
     void inject(AdminFragment fragment);
     void inject(AboutFragment fragment);
+    void inject(PicksFragment fragment);
+    void inject(TrackFragment fragment);
 }
